@@ -1,0 +1,16 @@
+package com.nxtGen.gaming;
+
+import java.awt.Graphics;
+
+import javax.swing.JPanel;
+
+public class Board extends JPanel{
+	public Board() {
+		setSize(1200,900);
+	}
+	
+	public void paintComponents(Graphics pen) {
+		//all Printing logic
+		super.paintComponents(pen);
+	}
+}

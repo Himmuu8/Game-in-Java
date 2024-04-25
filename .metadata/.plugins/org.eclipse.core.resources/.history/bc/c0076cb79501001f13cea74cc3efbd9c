@@ -1,0 +1,20 @@
+package com.nxtGen.gaming.sprites;
+
+import java.awt.Graphics;
+
+import javax.swing.ImageIcon;
+
+public class Player extends Sprite{
+	
+	public Player() {
+		w=200;
+		h=250;
+		x=25;
+		y=450;
+		image= new ImageIcon(Player.class.getResource("player.gif"));
+	}
+	public void move() {
+		x = x + speed;
+		
+	}
+}

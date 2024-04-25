@@ -1,0 +1,47 @@
+package com.nxtGen.gaming;
+
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
+import com.nxtGen.gaming.sprites.Player;
+
+public class Board extends JPanel {
+	Timer timer;
+    BufferedImage backgroundImage;
+    Player player;
+    public Board() {
+        setSize(1500, 900);
+        loadBackGroundImage();
+        player = new Player();
+        gameLoop();
+    }
+    private void gameLoop() {
+    	timer = new Timer(50, (e)->repaint());
+    	timer.start();
+        
+    }
+
+    private void loadBackGroundImage() {
+        try {
+            backgroundImage = ImageIO.read(Board.class.getResource("Board_BG.jpg"));
+        } catch (IOException e) {
+            System.out.println("Background Image Not Found......");
+            System.exit(1);
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void paintComponent(Graphics pen) {
+        // all Printing logic
+        super.paintComponent(pen);
+        pen.drawImage(backgroundImage, 0, 0, 1500, 900, null);
+        player.draw(pen);
+    }
+}

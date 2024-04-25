@@ -1,0 +1,67 @@
+package com.nxtGen.gaming;
+
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
+import com.nxtGen.gaming.sprites.Enemy;
+import com.nxtGen.gaming.sprites.Player;
+
+public class Board extends JPanel {
+	Timer timer;
+    BufferedImage backgroundImage;
+    Player player;
+    Enemy enemies[] = new Enemy[4]; 
+    public Board() {
+        setSize(1500, 900);
+        loadBackGroundImage();
+        player = new Player();
+        loadEnemies();
+        gameLoop();
+    }
+    private void loadEnemies() {
+    	int x = 420;
+    	int gap = 250;
+    	int speed = 8;
+    	for(int i=0;i<enemies.length;i++) {
+    		enemies[i] = new Enemy(x, speed);
+    		x = x+ gap;
+    		speed =speed + 5;
+    	}
+    }
+    private void gameLoop() {
+    	timer = new Timer(30, (e)->repaint());
+    	timer.start();
+        
+    }
+
+    private void loadBackGroundImage() {
+        try {
+            backgroundImage = ImageIO.read(Board.class.getResource("Board_BG.jpg"));
+        } catch (IOException e) {
+            System.out.println("Background Image Not Found......");
+            System.exit(1);
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    private void printEnemies(Graphics pen) {
+    	for(Enemy enemy:enemies) {
+    		enemy.draw(pen);
+    		enemy.move();
+    	}
+    }
+
+    @Override
+    protected void paintComponent(Graphics pen) {
+        // all Printing logic
+        super.paintComponent(pen);
+        pen.drawImage(backgroundImage, 0, 0, 1500, 900, null);
+        player.draw(pen);
+        printEnemies(pen);
+    }
+}

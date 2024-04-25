@@ -1,0 +1,17 @@
+package com.nxtGen.gaming;
+
+import javax.swing.JFrame;
+
+public class GameFrame extends JFrame {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		GameFrame frame = new GameFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);
+		frame.setSize(1500,1000);
+		frame.setVisible(true);
+
+	}
+
+}
